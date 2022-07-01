@@ -1,3 +1,5 @@
 class linked_list():
-    def __init(self, link):
-        self.link = link
+    def __init__(self):
+        self.links=[]
+    def add_child(self, link):
+        self.links.append(link)
