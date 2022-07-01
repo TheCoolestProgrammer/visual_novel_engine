@@ -92,6 +92,7 @@ def remove_child(index):
                 else:
                     print("wrong position")
 
+
 def customizing(index):
     while True:
         print("what`s you wanna do?")
@@ -122,14 +123,9 @@ def customize_menu():
         choise = input().lower()
         if choise == str(len(names)) or choise == "exit":
             break
-        if choise in names :
-            index = names.index(choise)
-        elif choise.isdigit() and 0 <= int(choise) < len(names):
-            index = int(choise)
-        else:
-            print("there is no such name/index")
-            continue
-        customizing(index)
+        index = right_input_check(names,choise)
+        if index:
+            customizing(index)
 def add_stage():
     print("print name of stage: ", end="")
     name = input()

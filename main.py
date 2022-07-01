@@ -42,24 +42,35 @@ def choise_check(choise, now_stage):
     if choise > len(now_stage)-1:
         return len(now_stage)-1
     else:
+        conditions = now_stage.conditions
+        cond_keys = conditions.keys()
         if choise == pygame.K_1:
-            return 0
+            if 0 in cond_keys:
+                return conditions[0]
         elif choise == pygame.K_2:
-            return 1
+            if 1 in cond_keys:
+                return conditions[1]
         elif choise == pygame.K_3:
-            return 2
+            if 2 in cond_keys:
+                return conditions[2]
         elif choise == pygame.K_4:
-            return 3
+            if 3 in cond_keys:
+                return conditions[3]
         elif choise == pygame.K_5:
-            return 4
+            if 4 in cond_keys:
+                return conditions[4]
         elif choise == pygame.K_6:
-            return 5
+            if 5 in cond_keys:
+                return conditions[5]
         elif choise == pygame.K_7:
-            return 6
+            if 6 in cond_keys:
+                return conditions[6]
         elif choise == pygame.K_8:
-            return 7
+            if 7 in cond_keys:
+                return conditions[7]
         elif choise == pygame.K_9:
-            return 8
+            if 8 in cond_keys:
+                return conditions[8]
 def mainloop():
     stages_tree = []
     now_stage = stages_tree[0]
