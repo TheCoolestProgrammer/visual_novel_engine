@@ -1,4 +1,5 @@
 import pygame, random, copy
+from linked_list import linked_list
 
 pygame.init()
 clock = pygame.time.Clock()
