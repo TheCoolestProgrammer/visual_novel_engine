@@ -3,10 +3,10 @@ import pygame
 stages = []
 
 def right_input_check(names,choise):
-    if choise.isdigit() and 0 <= int(choise) < len(names):
-        index2 = int(choise)
+    if (type(choise) == int or(type(choise)== str and choise.isdigit())) and 0 <= int(choise) < len(names):
+        index2 = str(choise)
     elif choise in names:
-        index2 = names.index(choise)
+        index2 = str(names.index(choise))
     else:
         print("there is no such name/index")
         return False
@@ -17,7 +17,7 @@ def adding_child(index):
     while True:
         print("what kind of stages you wanna add to", names[index],"?")
         for i in range(len(names)):
-            if i in names[index].links:
+            if stages[i] in stages[index].links:
                 print(i, names[i],"---connected---")
             else:
                 print(i, names[i])
@@ -25,14 +25,16 @@ def adding_child(index):
         choise = input()
         if choise.isdigit() and choise == str(len(names)) or choise == "exit":
             break
-        index2 = right_input_check(names, index)
+        index2 = right_input_check(names, choise)
         if index2:
-            if index2 in names[index]:
+            index2 = int(index2)
+            if names[index2] in stages[index].links:
                 print("this stage already connected")
+            elif names[index2] == stages[index].name:
+                print("cannot connet self")
             else:
-                names[index].links.append(names[index2])
-                print(f"you`ve successfully connect {names[index].name} as a parent and {names[index2].name} as a child")
-
+                stages[index].links.append(stages[index2])
+                print(f"you`ve successfully connect {names[index]} as a parent and {names[index2]} as a child")
 def delete_child(index):
     while True:
         children = stages[index].links
@@ -42,54 +44,54 @@ def delete_child(index):
         names = [i.name for i in children]
         print("what kind of child you wanna delete?")
         for i in range(len(names)):
-            if i in names[index].links:
-                print(i, names[i],"---connected---")
-            else:
-                print(i, names[i])
+            print(i, names[i])
         print(len(names), "exit")
         choise = input()
         if choise == str(len(names)) or choise == "exit":
             break
-        index2 = right_input_check(names, index)
+        index2 = right_input_check(names, choise)
         if index2:
-            if index2 not in names[index]:
-                print("this stage already disconnected")
-            else:
-                to_del =stages[index].links[index2]
+            index2 = int(index2)
+            if children[index2] in stages[index].links:
+                to_del = stages[index].links[index2]
                 del (stages[index].links[index2])
                 print(f"you`ve sucessfully disconnected {to_del.name} from {stages[index].name}")
-
+            else:
+                print("wrong data")
 def remove_child(index):
     while True:
-        names = [i.name for i in stages]
+        names = [i for i in stages[index].links]
         if len(names)<2:
             print("too low children")
             break
-        print("choose firt child")
+        print("choose child")
         for i in range(len(names)):
-            print(i, names[i])
+            print(i, names[i].name)
         print(len(names),"exit")
         choise = input()
         if choise == str(len(names)) or choise == "exit":
             break
-        index2 = right_input_check(names,index)
+        index2 = right_input_check(names,choise)
         if index2:
+            index2 = int(index2)
             while True:
-                print("print position or -1 to exit")
+                print("print position or exit")
                 pos = input()
                 if pos.isdigit():
                     pos = int(pos)
-                    if 0<= pos <=len(names)-1:
+                    if 0<= pos < len(stages[index].links):
                         stages[index].links.insert(pos,stages[index].links[index2])
-                        del(stages[index].links[index2+1])
-                        print(f"you`ve sucessfully remove child {stages[index].links[pos].name} on pos {pos}")
+                        if pos > index2:
+                            del(stages[index].links[index2])
+                        else:
+                            del(stages[index].links[index2+1])
+                        print(f"you`ve sucessfully remove child on pos {pos}")
                         break
                     else:
-                        if pos == -1:
-                            break
-                        else:
-                            print("wrong position")
+                        print("wrong position")
                 else:
+                    if pos == "exit":
+                        break
                     print("wrong position")
 
 def add_condition(index):
@@ -218,7 +220,7 @@ def customize_menu():
             break
         index = right_input_check(names,choise)
         if index:
-            customizing(index)
+            customizing(int(index))
 def add_stage():
     while True:
         print("print name of stage or exit")

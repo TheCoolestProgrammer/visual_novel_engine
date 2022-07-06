@@ -1,2 +1,3 @@
 a = [1,2,3,4]
-print(a.index(2))
+a.insert(0,4)
+print(a)
