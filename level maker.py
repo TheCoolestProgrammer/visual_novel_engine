@@ -145,6 +145,7 @@ def add_condition(index):
                     print("this key connot be use for choosing condition")
         else:
             break
+
 def delete_conditions(index):
     while True:
         conditions = [i for i in stages[index].conditions.keys()]
@@ -165,6 +166,14 @@ def delete_conditions(index):
                 del(stages[index].conditions[stage_child])
         else:
             print("wrong stage")
+
+def add_background(index):
+    print("print name and path to image or exit")
+    print("*note: path must be from folder where is level_maker.py !")
+    path = input()
+    if path == exit:
+        return 0
+    stages[index].image = path
 def customizing(index):
     while True:
         print("what`s you wanna do?")
@@ -173,8 +182,8 @@ def customizing(index):
         print("3. remove child(rm chd)") #done
         print("4. add condition(add con)") #done
         print("5. delete condition(del con)") #done
-        print("6. add background(add bg)")
-        print("7. exit")
+        print("6. add background(add bg)") #done
+        print("7. exit") #done
         choise = input()
         if choise == "1" or choise == "add chd":
             adding_child(index)
@@ -186,7 +195,10 @@ def customizing(index):
             add_condition(index)
         elif choise == "5" or choise == "del con":
             delete_conditions(index)
-
+        elif choise == "6" or choise == "add bg":
+            add_background(index)
+        elif choise == "7" or choise == "exit":
+            break
 def customize_menu():
     names = [i.name for i in stages]
     while True:

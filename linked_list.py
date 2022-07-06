@@ -3,5 +3,4 @@ class linked_list():
         self.links=[]
         self.name = name
         self.conditions=dict()
-    def add_child(self, link):
-        self.links.append(link)
+        self.image = "images/no_image.png"
