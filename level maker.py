@@ -1,3 +1,5 @@
+import codecs
+
 from linked_list import linked_list
 import pygame
 stages = []
@@ -250,6 +252,51 @@ def delete_stage():
                 del(stages[stages.index(stage)])
         else:
             print("wrong data")
+
+def save_project():
+    print("print path with name of your project")
+    print("(.py in the end)")
+    filename = input()
+    while True:
+        print("print name of start stage")
+        stage = input()
+        stage2 = ""
+        for i in stages:
+            if i.name == stage:
+                stage2 = stage
+                break
+        if stage2:
+            print("success")
+            break
+        else:
+            print("print right name")
+
+    with codecs.open(filename,"w") as file:
+        file.write("level = [")
+        for i in stages:
+            # links =[j.name for j in i.links]
+            # special_links ="["+  ", ".join(links)+"]"
+            name = i.name
+            image = i.image
+            # conditions ="["+ ", ".join(i.conditions)+"]"
+            file.write("{")
+            file.write(f"'{name}': ['{name}', '{image}', ")
+            file.write("{")
+            for j in i.conditions.keys():
+                # file.write("{")
+                file.write(f"'{j}': [")
+                print(i.conditions[j][0])
+                file.write(f"'{i.conditions[j][0]}', {i.conditions[j][1]}")
+                file.write("], ")
+            file.write("}, ")
+
+            file.write("[")
+            for j in i.links:
+                file.write(f"'{j.name}', ")
+            file.write("]")
+            file.write("]},\n")
+        file.write("]")
+    print(f"project saved as {filename}")
 while True:
     print("what`s you wanna do?")
     print("1. add stage")
@@ -263,3 +310,5 @@ while True:
         customize_menu()
     elif choise == "3":
         delete_stage()
+    elif choise == "4":
+        save_project()
