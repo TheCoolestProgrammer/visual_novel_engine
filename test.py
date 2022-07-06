@@ -1,3 +1,3 @@
-a= [1,2,3,]
-print(a)
+from levels import test
+print(test.level)
 

@@ -104,10 +104,7 @@ def add_condition(index):
             break
         print("print name of child stage you need to connect")
         for i in range(len(names)):
-            if stages[i] in stages[index].links:
-                print(i,names[i],"--connected--")
-            else:
-                print(i,names[i])
+            print(i,names[i])
         print(len(names), "exit")
         stage_child = input()
         if int(stage_child) ==len(names) or stage_child == "exit":
