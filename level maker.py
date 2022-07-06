@@ -95,14 +95,14 @@ def remove_child(index):
                     print("wrong position")
 
 def add_condition(index):
-    names = [i.name for i in stages]
+    names = [i.name for i in stages[index].links]
     while True:
         if len(stages[index].conditions) == len(stages[index].links):
             print("every conditions to childrens already was added")
             break
         print("print name of child stage you need to connect")
         for i in range(len(names)):
-            if names[i] in stages[index].conditions:
+            if stages[i] in stages[index].links:
                 print(i,names[i],"--connected--")
             else:
                 print(i,names[i])
@@ -144,6 +144,7 @@ def add_condition(index):
                     else:
                         stages[index].conditions[stage_child] = [text,button]
                         print("you`ve sucessfully added condition")
+                    print(stages[index].conditions)
                     break
                 else:
                     print("this key connot be use for choosing condition")
