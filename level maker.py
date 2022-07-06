@@ -138,8 +138,10 @@ def add_condition(index):
                         button = pygame.K_9
                     if stage_child.isdigit():
                         stages[index].conditions[names[int(stage_child)]] = [text,button]
+                        print("you`ve sucessfully added condition")
                     else:
                         stages[index].conditions[stage_child] = [text,button]
+                        print("you`ve sucessfully added condition")
                     break
                 else:
                     print("this key connot be use for choosing condition")
@@ -162,7 +164,9 @@ def delete_conditions(index):
         if stage_child in conditions or (stage_child.isdigit() and 0 <= int(stage_child) < len(conditions)):
             if stage_child.isdigit():
                 del(stages[index].conditions[conditions[int(stage_child)]])
+                print("you`ve sucessfully deleted condition")
             else:
+                print("you`ve sucessfully deleted condition")
                 del(stages[index].conditions[stage_child])
         else:
             print("wrong stage")
@@ -216,18 +220,43 @@ def customize_menu():
         if index:
             customizing(index)
 def add_stage():
-    print("print name of stage: ", end="")
-    name = input()
-    stage = linked_list(name)
-    stages.append(stage)
+    while True:
+        print("print name of stage or exit")
+        name = input()
+        if name == "exit":
+            break
+        stage = linked_list(name)
+        stages.append(stage)
+def delete_stage():
+    while True:
+        names = [i.name for i in stages]
+        if len(names) == 0:
+            print("nothing to delete")
+            break
+        print("what kind of stages you wanna delete?")
+        for i in range(len(names)):
+            print(i, names[i])
+        print(len(names),"exit")
+        stage = input()
+        if stage == "exit" or int(stage) ==len(names):
+            break
+        if stage in names or (stage.isdigit() and 0 <= int(stage) < len(names)):
+            if stage.isdigit():
+                del(stages[int(stage)])
+            else:
+                del(stages[stages.index(stage)])
+        else:
+            print("wrong data")
 while True:
     print("what`s you wanna do?")
     print("1. add stage")
     print("2. customize stage")
     print("3. delete stage")
-    print("4. save game")
+    print("4. save project")
     choise = input()
     if choise == "1":
         add_stage()
     elif choise == "2":
         customize_menu()
+    elif choise == "3":
+        delete_stage()
