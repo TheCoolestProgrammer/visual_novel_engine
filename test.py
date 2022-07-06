@@ -1,3 +1,5 @@
-a = [1,2,3,4,5]
-a.insert(1,0)
-print(a)
+a = [11,21,31,41,5]
+for i in range(10):
+    if i in a:
+        raise ValueError("asdasdasd")
+print("aboba")
