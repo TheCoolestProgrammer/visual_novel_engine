@@ -100,13 +100,16 @@ def add_condition(index):
             break
         print("print name of child stage you need to connect")
         for i in range(len(names)):
-            print(i,names[i])
+            if names[i] in stages[index].conditions:
+                print(i,names[i],"--connected--")
+            else:
+                print(i,names[i])
         print(len(names), "exit")
         stage_child = input()
         if int(stage_child) ==len(names) or stage_child == "exit":
             break
-        if stage_child in names or 0<=int(stage_child) <len(names):
-            if stage_child in stages[index].conditions or names[int(stage_child)] in stages[index].conditions:
+        if stage_child in names or (stage_child.isdigit() and 0<=int(stage_child) <len(names)):
+            if stage_child in stages[index].conditions or (stage_child.isdigit() and  names[int(stage_child)] in stages[index].conditions):
                 print("already connected")
                 continue
             while True:
@@ -142,6 +145,26 @@ def add_condition(index):
                     print("this key connot be use for choosing condition")
         else:
             break
+def delete_conditions(index):
+    while True:
+        conditions = [i for i in stages[index].conditions.keys()]
+        if len(stages[index].conditions) == 0:
+            print("nothing to delete")
+            break
+        print("print name of child stage you need to delete")
+        for i in range(len(conditions)):
+            print(i, conditions[i])
+        print(len(conditions), "exit")
+        stage_child = input()
+        if int(stage_child) == len(conditions) or stage_child == "exit":
+            break
+        if stage_child in conditions or (stage_child.isdigit() and 0 <= int(stage_child) < len(conditions)):
+            if stage_child.isdigit():
+                del(stages[index].conditions[conditions[int(stage_child)]])
+            else:
+                del(stages[index].conditions[stage_child])
+        else:
+            print("wrong stage")
 def customizing(index):
     while True:
         print("what`s you wanna do?")
@@ -149,7 +172,7 @@ def customizing(index):
         print("2. delete child(del chd)") #done
         print("3. remove child(rm chd)") #done
         print("4. add condition(add con)") #done
-        print("5. delete condition(del con)")
+        print("5. delete condition(del con)") #done
         print("6. add background(add bg)")
         print("7. exit")
         choise = input()
@@ -161,6 +184,9 @@ def customizing(index):
             remove_child(index)
         elif choise == "4" or choise == "add con":
             add_condition(index)
+        elif choise == "5" or choise == "del con":
+            delete_conditions(index)
+
 def customize_menu():
     names = [i.name for i in stages]
     while True:
