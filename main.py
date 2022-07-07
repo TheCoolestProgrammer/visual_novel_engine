@@ -1,18 +1,20 @@
 import pygame, random, copy
 from linked_list import linked_list
-from levels import test
+from levels import test, example
 
 pygame.init()
 clock = pygame.time.Clock()
 screen_width = 1280
 screen_height = 720
 screen = pygame.display.set_mode((screen_width, screen_height))
-process_running = True
-fps = 200
+
+fps = 60
 
 choise_buttons = [pygame.K_1,pygame.K_2,pygame.K_3,pygame.K_4,pygame.K_5,pygame.K_6,pygame.K_7,pygame.K_8,pygame.K_9]
 
 stages = []
+process_running = True
+
 
 def adapter(level):
     # making objects from dictionary
@@ -108,8 +110,9 @@ def choise_check(choise, now_stage):
     elif choise == pygame.K_9:
         if pygame.K_9 in cond_keys:
             return 8
+
 def mainloop():
-    level = test.level
+    level = example.level
     adapter(level)
     now_stage = stages[0]
     while process_running:
@@ -129,12 +132,10 @@ def mainloop():
                         now_stage =change_stage(now_stage)
         # if there isn`t choise
         else:
-            # print("________________________________")
             if is_active_key_pressed():
-            #     print("+++++++++++++++++++++++++++++++++++++")
                     now_stage = change_stage(now_stage)
         drawing(now_stage)
-        print(now_stage)
+        # print(now_stage)
         pygame.time.delay(fps)
 
 
