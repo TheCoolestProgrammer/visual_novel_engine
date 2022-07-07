@@ -31,12 +31,17 @@ def adapter(level):
                     stages[i].links[j] = stages[k]
                     break
     #changing conditions
+
     for i in range(len(stages)):
+        changes = dict()
         for j in stages[i].conditions.keys():
             for k in range(len(stages)):
                 if stages[k].name ==j:
-                    stages[i].conditions[stages[k]] = stages[i].conditions[j]
-                    del(stages[i].conditions[j])
+                    # stages[i].conditions[stages[k]] = stages[i].conditions[j]
+                    # changes[stages[k]] = stages[i].conditions[j]
+                    # changes.append([stages[i],{}])
+                    changes[stages[k]] = stages[i].conditions[j]
+        stages[i].conditions = changes
     print("file loading is done!")
 def change_stage(parent,choise=0):
     return parent.links[choise]
