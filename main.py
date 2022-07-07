@@ -73,59 +73,66 @@ def choose():
     for event in pygame.event.get():
         if event.type == pygame.KEYDOWN:
             return event.key
+    return False
 def choise_check(choise, now_stage):
-    if choise > len(now_stage)-1:
-        return len(now_stage)-1
-    else:
-        conditions = now_stage.conditions
-        cond_keys = conditions.keys()
-        if choise == pygame.K_1:
-            if 0 in cond_keys:
-                return conditions[0]
-        elif choise == pygame.K_2:
-            if 1 in cond_keys:
-                return conditions[1]
-        elif choise == pygame.K_3:
-            if 2 in cond_keys:
-                return conditions[2]
-        elif choise == pygame.K_4:
-            if 3 in cond_keys:
-                return conditions[3]
-        elif choise == pygame.K_5:
-            if 4 in cond_keys:
-                return conditions[4]
-        elif choise == pygame.K_6:
-            if 5 in cond_keys:
-                return conditions[5]
-        elif choise == pygame.K_7:
-            if 6 in cond_keys:
-                return conditions[6]
-        elif choise == pygame.K_8:
-            if 7 in cond_keys:
-                return conditions[7]
-        elif choise == pygame.K_9:
-            if 8 in cond_keys:
-                return conditions[8]
+
+    conditions = now_stage.conditions
+    # cond_keys = conditions.keys()
+    cond_keys = []
+    for i in conditions.values():
+        cond_keys.append(i[1])
+    if choise == pygame.K_1:
+        if pygame.K_1 in cond_keys:
+            return 0
+    elif choise == pygame.K_2:
+        if pygame.K_2 in cond_keys:
+            return 1
+    elif choise == pygame.K_3:
+        if pygame.K_3 in cond_keys:
+            return 2
+    elif choise == pygame.K_4:
+        if pygame.K_4 in cond_keys:
+            return 3
+    elif choise == pygame.K_5:
+        if pygame.K_5 in cond_keys:
+            return 4
+    elif choise == pygame.K_6:
+        if pygame.K_6 in cond_keys:
+            return 5
+    elif choise == pygame.K_7:
+        if pygame.K_7 in cond_keys:
+            return 6
+    elif choise == pygame.K_8:
+        if pygame.K_8 in cond_keys:
+            return 7
+    elif choise == pygame.K_9:
+        if pygame.K_9 in cond_keys:
+            return 8
 def mainloop():
     level = test.level
     adapter(level)
     now_stage = stages[0]
     while process_running:
-        events_check()
+        # events_check()
         # if there is choise
         if len(now_stage.links)>1:
             choise = choose()
+            print(choise)
             if choise:
+                print("i`ve been here")
                 if choise in choise_buttons:
                     choise = choise_check(choise,now_stage)
-                    change_stage(now_stage,choise)
+                    print(choise)
+                    now_stage = change_stage(now_stage,choise)
                 else:
                     if is_active_key_pressed():
-                        change_stage(now_stage)
+                        now_stage =change_stage(now_stage)
         # if there isn`t choise
         else:
+            # print("________________________________")
             if is_active_key_pressed():
-                change_stage(now_stage)
+            #     print("+++++++++++++++++++++++++++++++++++++")
+                    now_stage = change_stage(now_stage)
         drawing(now_stage)
         print(now_stage)
         pygame.time.delay(fps)

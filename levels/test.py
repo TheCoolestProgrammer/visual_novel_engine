@@ -2,3 +2,7 @@ level = [{'main': ['main', 'images/no_image.png', {'a': ['asdsad', 49], 'b': ['d
 {'a': ['a', 'images/no_image.png', {}, []]},
 {'b': ['b', 'images/no_image.png', {}, []]},
 ]
+# level = [{'main': ['main', 'images/no_image.png', {'a': ['asdsad', 49], }, ['a', ]]},
+# {'a': ['a', 'images/no_image.png', {}, []]},
+# {'b': ['b', 'images/no_image.png', {}, []]},
+# ]
