@@ -1,3 +1,5 @@
-from levels import test
-print(test.level)
-
+a = {1:123,2:12312,3:123123}
+x = a[3]
+del(a[3])
+a[4] = x
+print(a)
