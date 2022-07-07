@@ -46,8 +46,11 @@ def adapter(level):
 def change_stage(parent,choise=0):
     return parent.links[choise]
 
-def drawing():
+def drawing(now_frame):
     screen.fill((0, 0, 0))
+    background = pygame.image.load(now_frame.image)
+    pygame.transform.scale(background,(screen_width,screen_height))
+    screen.blit(background,(0,0))
     pygame.display.update()
 
 def events_check():
@@ -123,7 +126,8 @@ def mainloop():
         else:
             if is_active_key_pressed():
                 change_stage(now_stage)
-        drawing()
+        drawing(now_stage)
+        print(now_stage)
         pygame.time.delay(fps)
 
 
